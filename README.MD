@@ -1,6 +1,10 @@
-##### Docker image for build AWS Lambdas
+### Docker image for build AWS Lambdas
 
 This image can help to build and test AWS lambda packages without EC2 instances
+
+##### Requirements
+- Docker
+- docker-compose
 
 #### Usage
 - Copy your code and `requirements.txt` to the `./src` dir
