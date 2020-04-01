@@ -37,3 +37,4 @@ Targets:
 - [How to build an AWS Lambda function with Python 3.7 (the right way)](https://medium.com/@niklongstone/how-to-build-an-aws-lambda-function-with-python-3-7-the-right-way-21888e2edbe8)
 - [amazonlinux DockerHub](https://hub.docker.com/_/amazonlinux/?tab=tags)
 - [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+- [A Docker based replica of the live AWS Lambda environment](https://github.com/lambci/docker-lambda)
