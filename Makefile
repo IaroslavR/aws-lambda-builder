@@ -34,5 +34,5 @@ clean:  ## Clean dirs
 build-package:  ## Build lambda package
 	docker-compose up
 
-build-package-:  ## Build lambda package
-	docker-compose up
+build-package-custom:  ## Build lambda package with the help of the custom builder
+	docker-compose -f docker-compose.custom.yml up

@@ -1,4 +1,5 @@
 #!/bin/bash
+yum install mysql-devel
 rm -rf /.package/* /.build/*
 touch /.package/.gitkeep /.build/.gitkeep
 cp -r /src/* /.build
