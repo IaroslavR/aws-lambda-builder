@@ -8,18 +8,20 @@ RUN ulimit -n 1024 && \
     openssl-devel \
     zip \
     zlib-devel \
-    libffi-devel \
-    yum -y clean all
+    libffi-devel && \
+    yum -y clean all && \
+    rm -rf /var/cache/yum
 
 # Install Python
 ADD ./.cache /cache
 WORKDIR /cache
 RUN mkdir Python && \
     tar xzf Python.tgz -C Python --strip-components 1 && \
-    cd Python ; ./configure --enable-optimizations; make altinstall
-
-RUN ln -s /usr/local/bin/python3.7 /usr/local/bin/python3 && \
+    cd Python ; ./configure --enable-optimizations; make altinstall && \
+    ln -s /usr/local/bin/python3.7 /usr/local/bin/python3 && \
     python3 -V
+
+RUN rm -rf /cache
 
 # Install pip and boto
 # boto3 is available to lambda processes by default,
