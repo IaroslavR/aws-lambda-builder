@@ -1,6 +1,10 @@
 ### Docker image for build AWS Lambdas
 
-This image can help to build and test AWS lambda packages without EC2 instances
+Base helper image for build and test AWS lambda packages without EC2 instances
+
+##### Why? We are already have [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
+
+Answer: https://github.com/awslabs/aws-sam-cli/issues/973
 
 ##### Requirements
 - Docker
