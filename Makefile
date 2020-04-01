@@ -33,3 +33,6 @@ clean:  ## Clean dirs
 
 build-package:  ## Build lambda package
 	docker-compose up
+
+build-package-:  ## Build lambda package
+	docker-compose up

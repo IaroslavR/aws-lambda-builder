@@ -10,5 +10,4 @@ services:
       - ./src:/src
       - ./.build:/.build
       - ./.package:/.package
-    entrypoint: /bin/bash -ex
-    command: /scripts/packager.sh
+
