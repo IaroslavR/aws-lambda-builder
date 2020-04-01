@@ -1,0 +1,14 @@
+---
+version: "3.7"
+
+services:
+  cognito-lambda-builder:
+    image: ${NAME}:${TAG}
+    build:
+      context: .
+    volumes:
+      - ./src:/src
+      - ./.build:/.build
+      - ./.package:/.package
+    entrypoint: /bin/bash -ex
+    command: /scripts/packager.sh
