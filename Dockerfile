@@ -21,10 +21,10 @@ RUN mkdir Python && \
     tar xzf Python.tgz -C Python --strip-components 1 && \
     cd Python ; ./configure --enable-optimizations; make altinstall && \
     ln -s /usr/local/bin/python3.7 /usr/local/bin/python3 && \
-    python3 -V \
     python3 get-pip.py  && \
-    pip -V  && \
     python3 -m pip install --upgrade pip && \
+    python3 -V && \
+    pip -V  && \
     python3 -m pip install botocore==1.13.34 boto3==1.10.34 && \
     rm -rf /cache
 ADD ./scripts /scripts
