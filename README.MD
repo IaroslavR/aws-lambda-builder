@@ -10,7 +10,7 @@ This image can help to build and test AWS lambda packages without EC2 instances
 - Copy your code and `requirements.txt` to the `./src` dir
 - Execute `make build-package`
 
-Results can be found in `./.build`(build sources) and in `./.package`(zipped lambda) dirs
+Results can be found in `./.build`(sources + libs) and in `./.package`(ready to use zipped lambda) dirs. Python version and other globals can be modified in `.env` file
 
 #### Available commands
  ```
