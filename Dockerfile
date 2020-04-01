@@ -21,8 +21,6 @@ RUN mkdir Python && \
     ln -s /usr/local/bin/python3.7 /usr/local/bin/python3 && \
     python3 -V
 
-RUN rm -rf /cache
-
 # Install pip and boto
 # boto3 is available to lambda processes by default,
 # but it's not in the amazonlinux image
@@ -32,8 +30,8 @@ RUN python3 get-pip.py  && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install botocore==1.13.34 boto3==1.10.34
 
+RUN rm -rf /cache
 ADD ./scripts /scripts
-
 WORKDIR /src
 
 # Make it possible to build numpy:
