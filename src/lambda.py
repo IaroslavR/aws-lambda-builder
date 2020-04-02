@@ -1,6 +1,9 @@
+from time import sleep
+
 from MySQLdb import _mysql
 
-db = _mysql.connect(host="localhost", user="root", passwd="password", db="database")
+sleep(5)  # wait for server
+db = _mysql.connect(host="mysql", user="root", passwd="password", db="database")
 
 
 def lambda_handler(event, context):
