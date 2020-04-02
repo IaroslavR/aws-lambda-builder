@@ -48,7 +48,7 @@ cognito-lambda-builder_1  | ERROR: Command errored out with exit status 1: pytho
 aws-lambda-builder_cognito-lambda-builder_1 exited with code 1
 
 ```
-As we can see we can't build our [lambda](./src/lambda.py) with `mysqlclient` in [reqs](./src/requirements.txt) without `mysql-devel` installed. Let`s use modified for our needs [./scripts/custom_packager.sh](./scripts/custom_packager.sh) instead of base one.
+As we can see we can't build our [lambda](./src/lambda.py) with `mysqlclient` in [reqs](./src/requirements.txt) without `mysql-devel` installed. Lets use modified for our needs [./scripts/custom_packager.sh](./scripts/custom_packager.sh) instead of base one. **Pay attention** Step where I search for `so` file which I need to copy was skipped in this README :) But you can use for it testing stack [described](#testing) below
 ```
 $ make build-package-custom 
 docker-compose -f docker-compose.custom.yml up
