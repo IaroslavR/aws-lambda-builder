@@ -34,7 +34,7 @@ clean:  ## Clean dirs
 build-package:  ## Build lambda package with container /scripts/builder.sh
 	docker-compose up
 
-build-package-custom:  ## Build lambda package with the help of the local ./scripts/custom_builder.sh
+build-package-custom:  ## Build lambda package with local ./scripts/custom_builder.sh
 	docker-compose -f docker-compose.custom.yml up
 
 test-package:  ## Test lambda with the help of lambci/lambda

@@ -6,7 +6,7 @@ services:
     image: lambci/lambda:python3.7
     volumes:
       - ./.build:/var/task:ro,delegated
-    command: lambda.lambdahandler
+    command: lambda.lambda_handler
   mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
