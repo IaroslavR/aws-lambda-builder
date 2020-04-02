@@ -7,5 +7,3 @@ cd /.build
 python3 -m pip install -r requirements.txt -t .
 zip -r /.package/lambda.zip *
 chmod -R 777 /.build /.package
-# test :)
-python3 /.build/lambda.py

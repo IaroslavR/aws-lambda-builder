@@ -31,8 +31,11 @@ clean:  ## Clean dirs
 	mkdir .package .build .cache
 	touch .package/.gitkeep .build/.gitkeep .cache/.gitkeep
 
-build-package:  ## Build lambda package
+build-package:  ## Build lambda package with container /scripts/builder.sh
 	docker-compose up
 
-build-package-custom:  ## Build lambda package with the help of the custom builder
+build-package-custom:  ## Build lambda package with the help of the local ./scripts/custom_builder.sh
 	docker-compose -f docker-compose.custom.yml up
+
+test-package:  ## Test lambda with the help of lambci/lambda
+	docker-compose -f docker-compose.lambci.yml up
