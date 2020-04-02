@@ -31,8 +31,10 @@ RUN mkdir Python && \
     python3 -m pip install botocore==1.13.34 boto3==1.10.34 && \
     rm -rf /cache
 
-COPY ./scripts /scripts
+COPY ./scripts/packager.sh /scripts/packager.sh
 WORKDIR /src
 # Make it possible to build numpy:
 # https://github.com/numpy/numpy/issues/14147
 ENV CFLAGS="-std=c99"
+ENTRYPOINT ["/bin/bash", "-ex"]
+CMD ["/scripts/packager.sh"]

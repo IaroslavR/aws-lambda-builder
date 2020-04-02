@@ -10,4 +10,4 @@ services:
       - ./src:/src
       - ./.build:/.build
       - ./.package:/.package
-
+      - ./scripts/custom_packager.sh:/scripts/packager.sh
