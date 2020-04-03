@@ -8,13 +8,16 @@ include .env
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n\nTargets:\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-build-image: .cache/Python.tgz .cache/get-pip.py ## Build builder Docker image
+build-image: .cache/Python.tgz .cache/get-pip.py ## Build base builder Docker image
 	docker-compose build
 
-delete-image: check-clean ## Remove docker image
-	docker image rmi ${NAME}:${TAG}
+build-image-custom: ## Build custom runtime from ./examples/Doskerfile
+	docker build \
+		-t ${CUSTOM_IMAGE_NAME}:${CUSTOM_IMAGE_TAG} \
+		--build-arg BASE_IMAGE=${NAME}:${TAG}\
+		./example
 
-push-image:  ## Push image to the regestry
+push-image:  ## Push base builder image to the regestry
 	docker push ${NAME}:${TAG}
 
 .cache/Python.tgz:
@@ -23,19 +26,13 @@ push-image:  ## Push image to the regestry
 .cache/get-pip.py:
 	cd .cache && wget https://bootstrap.pypa.io/get-pip.py
 
-check-clean:
-	@echo -n "Are you sure? Docker image ${NAME}:${TAG} will be deleted [y/N] " && read ans && [ $${ans:-N} = y ]
-
 clean:  ## Clean dirs
-	rm -fr .package .build .cache
-	mkdir .package .build .cache
-	touch .package/.gitkeep .build/.gitkeep .cache/.gitkeep
+	rm -fr .package .build .cache .wheelhouse
+	mkdir .package .build .cache .wheelhouse
+	touch .package/.gitkeep .build/.gitkeep .cache/.gitkeep .wheelhouse/.gitkeep
 
-build-package:  ## Build lambda package with container /scripts/builder.sh
-	docker-compose up
-
-build-package-custom:  ## Build lambda package with local ./scripts/custom_builder.sh
-	docker-compose -f docker-compose.custom.yml up
+build-package: build-image-custom ## Build lambda package with ./examples/Doskerfile as runtime
+	NAME=${CUSTOM_IMAGE_NAME} TAG=${CUSTOM_IMAGE_TAG} docker-compose -f docker-compose.yml up
 
 test-package:  ## Test lambda with the help of lambci/lambda
 	docker-compose -f docker-compose.lambci.yml up

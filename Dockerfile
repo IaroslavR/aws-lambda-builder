@@ -4,11 +4,20 @@ FROM amazonlinux:2018.03
 RUN ulimit -n 1024 && \
     yum -y update && \
     yum -y install \
+    autoconf \
+    automake \
+    bzip2 \
+    findutils \
     gcc \
+    gcc-c++ \
+    git \
+    libffi-devel \
     openssl-devel \
+    unzip \
+    unzip \
+    wget \
     zip \
-    zlib-devel \
-    libffi-devel && \
+    zlib-devel && \
     yum -y clean all && \
     rm -rf /var/cache/yum
 
@@ -28,12 +37,21 @@ RUN mkdir Python && \
     python3 -m pip install --upgrade pip && \
     python3 -V && \
     pip -V  && \
-    python3 -m pip install botocore==1.13.34 boto3==1.10.34 && \
+    python3 -m pip install botocore==1.13.34 boto3==1.10.34 auditwheel && \
+    git clone https://github.com/nvictus/patchelf.git && \
+    cd patchelf && \
+    ./bootstrap.sh && \
+    ./configure && \
+    make && \
+    make install && \
     rm -rf /cache
 
 COPY ./scripts/packager.sh /scripts/packager.sh
-WORKDIR /src
-# Make it possible to build numpy:
+WORKDIR /.build
+
+ENV PIP_WHEEL_DIR=/.wheelhouse
+ENV PIP_FIND_LINKS=/.wheelhouse
+ENV PIP_DESTINATION_DIRECTORY=/.wheelhouse
 # https://github.com/numpy/numpy/issues/14147
 ENV CFLAGS="-std=c99"
 ENTRYPOINT ["/bin/bash", "-ex"]

@@ -2,12 +2,13 @@
 version: "3.7"
 
 services:
-  cognito-lambda-builder:
+  lambda-builder:
     image: ${NAME}:${TAG}
     build:
       context: .
     volumes:
       - ./src:/src
       - ./.build:/.build
+      - ./.cache:/.cache
       - ./.package:/.package
-
+      - ./.wheelhouse:/.wheelhouse
