@@ -17,7 +17,7 @@ build-image-custom: ## Build custom runtime from ./examples/Doskerfile
 		--build-arg BASE_IMAGE=${NAME}:${TAG}\
 		./example
 
-push-image:  ## Push image to the regestry
+push-image:  ## Push base builder image to the regestry
 	docker push ${NAME}:${TAG}
 
 .cache/Python.tgz:
@@ -26,7 +26,7 @@ push-image:  ## Push image to the regestry
 .cache/get-pip.py:
 	cd .cache && wget https://bootstrap.pypa.io/get-pip.py
 
-clean:  ## Clean everything
+clean:  ## Clean dirs
 	rm -fr .package .build .cache .wheelhouse
 	mkdir .package .build .cache .wheelhouse
 	touch .package/.gitkeep .build/.gitkeep .cache/.gitkeep .wheelhouse/.gitkeep

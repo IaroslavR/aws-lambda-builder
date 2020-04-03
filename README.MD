@@ -137,19 +137,18 @@ aws-lambda-builder_lambda_1 exited with code 0
 
 #### Available commands
  ```
- $ make
+$ make
 
 Usage:
   make <target>
 
 Targets:
   help        Display this help
-  build-image  Build builder Docker image
-  delete-image  Remove docker image
-  push-image  Push image to the regestry
+  build-image  Build base builder Docker image
+  build-image-custom  Build custom runtime from ./examples/Doskerfile
+  push-image  Push base builder image to the regestry
   clean       Clean dirs
-  build-package  Build lambda package with container /scripts/builder.sh
-  build-package-custom  Build lambda package with local ./scripts/custom_builder.sh
+  build-package  Build lambda package with ./examples/Doskerfile as runtime
   test-package  Test lambda with the help of lambci/lambda
 ```
 
