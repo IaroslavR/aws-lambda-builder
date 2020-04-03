@@ -3,4 +3,6 @@
 /.build/
 /.package/
 /.cache/
+/.wheelhouse/
+/.pip_download_cache/
 

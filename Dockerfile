@@ -32,7 +32,11 @@ RUN mkdir Python && \
     rm -rf /cache
 
 COPY ./scripts/packager.sh /scripts/packager.sh
-WORKDIR /src
+WORKDIR /.build
+
+ENV PIP_WHEEL_DIR=/.wheelhouse
+ENV PIP_FIND_LINKS=/.wheelhouse
+ENV PIP_DESTINATION_DIRECTORY=/.wheelhouse
 # Make it possible to build numpy:
 # https://github.com/numpy/numpy/issues/14147
 ENV CFLAGS="-std=c99"

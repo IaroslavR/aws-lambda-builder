@@ -1,8 +1,13 @@
 #!/bin/bash
+
+# cleanup
 rm -rf /.package/* /.build/*
 touch /.package/.gitkeep /.build/.gitkeep
+# build
 cp -r /src/* /.build
-cd /.build
-python3.7 -m pip install -r requirements.txt -t .
+pip download -r requirements.txt
+pip wheel -r requirements.txt
+pip install --no-index -r requirements.txt -t .
 zip -r /.package/lambda.zip *
-chmod -R 777 /.build /.package
+# fix
+chmod -R 777 /.build /.package /.wheelhouse

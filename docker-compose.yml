@@ -10,4 +10,5 @@ services:
       - ./src:/src
       - ./.build:/.build
       - ./.package:/.package
+      - ./.wheelhouse:/.wheelhouse
 

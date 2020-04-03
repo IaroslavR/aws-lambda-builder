@@ -11,8 +11,12 @@ help:  ## Display this help
 build-image: .cache/Python.tgz .cache/get-pip.py ## Build builder Docker image
 	docker-compose build
 
-delete-image: check-clean ## Remove docker image
-	docker image rmi ${NAME}:${TAG}
+build-image-custom: ## Build custom runtime Docker image
+	docker build \
+		-t ${CUSTOM_IMAGE_NAME}:${CUSTOM_IMAGE_TAG} \
+		--build-arg BASE_IMAGE=${NAME}:${TAG}\
+		./example
+	#docker-compose -f docker-compose.custom.yml build
 
 push-image:  ## Push image to the regestry
 	docker push ${NAME}:${TAG}
@@ -23,19 +27,13 @@ push-image:  ## Push image to the regestry
 .cache/get-pip.py:
 	cd .cache && wget https://bootstrap.pypa.io/get-pip.py
 
-check-clean:
-	@echo -n "Are you sure? Docker image ${NAME}:${TAG} will be deleted [y/N] " && read ans && [ $${ans:-N} = y ]
+clean:  ## Clean everything
+	rm -fr .package .build .cache .wheelhouse
+	mkdir .package .build .cache .wheelhouse
+	touch .package/.gitkeep .build/.gitkeep .cache/.gitkeep .wheelhouse/.gitkeep
 
-clean:  ## Clean dirs
-	rm -fr .package .build .cache
-	mkdir .package .build .cache
-	touch .package/.gitkeep .build/.gitkeep .cache/.gitkeep
+build-package: build-image-custom ## Build lambda package with local ./scripts/custom_builder.sh
+	NAME=${CUSTOM_IMAGE_NAME} TAG=${CUSTOM_IMAGE_TAG} docker-compose -f docker-compose.yml up
 
-build-package:  ## Build lambda package with container /scripts/builder.sh
-	docker-compose up
-
-build-package-custom:  ## Build lambda package with local ./scripts/custom_builder.sh
-	docker-compose -f docker-compose.custom.yml up
-
-test-package:  ## Test lambda with the help of lambci/lambda
+test-package: build-package ## Test lambda with the help of lambci/lambda
 	docker-compose -f docker-compose.lambci.yml up
