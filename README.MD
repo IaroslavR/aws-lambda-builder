@@ -4,7 +4,7 @@ Base helper image for build and test AWS lambda packages without EC2 instances
 
 Inspired by authors of [An easier way to build AWS Lambda deployment packages — with Docker instead of EC2](https://blog.quiltdata.com/an-easier-way-to-build-lambda-deployment-packages-with-docker-instead-of-ec2-9050cd486ba8?gi=c983640fef87) and  [How to build an AWS Lambda function with Python 3.7 (the right way)](https://medium.com/@niklongstone/how-to-build-an-aws-lambda-function-with-python-3-7-the-right-way-21888e2edbe8) articles 
 
-Main problem described in the [The Black Magic of Python Wheels](https://hashman.ca/pycon-2019/ehashman-pycon2019-slides.pdf). Due to the [bug](https://github.com/pypa/auditwheel/issues/159) in the `patcheif` we need to use this repo with patched for [auditwheel](https://github.com/pypa/auditwheel) version
+Main problem described in the [The Black Magic of Python Wheels](https://hashman.ca/pycon-2019/ehashman-pycon2019-slides.pdf). Due to the [bug](https://github.com/pypa/auditwheel/issues/159) in the `patcheif` we need to use [this](https://github.com/nvictus/patchelf.git) repo with patched for [auditwheel](https://github.com/pypa/auditwheel) version
 
 ##### Why? If...
 - **Q** We are already have [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
