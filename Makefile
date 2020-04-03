@@ -40,6 +40,3 @@ build-package: build-image-custom ## Build lambda package with ./examples/Dosker
 
 test-package:  ## Test lambda with the help of lambci/lambda
 	docker-compose -f docker-compose.lambci.yml up
-
-start-proxy:  ## Start Squid proxy for more fast builds
-	docker-compose -f docker-compose.squid.yml up
