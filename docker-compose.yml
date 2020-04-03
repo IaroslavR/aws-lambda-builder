@@ -6,9 +6,15 @@ services:
     image: ${NAME}:${TAG}
     build:
       context: .
+#      args:
+#        ftp_proxy: "http://127.0.0.1:3128"
+#        http_proxy: "http://127.0.0.1:3128"
+#        https_proxy: "http://127.0.0.1:3128"
     volumes:
       - ./src:/src
       - ./.build:/.build
+      - ./.cache:/.cache
       - ./.package:/.package
       - ./.wheelhouse:/.wheelhouse
+      - ./scripts/packager.sh:/scripts/packager.sh
 

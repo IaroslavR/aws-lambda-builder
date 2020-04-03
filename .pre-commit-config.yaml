@@ -1,12 +1,4 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
-    hooks:
-      - id: check-yaml
-      - id: check-json
-      - id: detect-aws-credentials
-      - id: detect-private-key
-      - id: no-commit-to-branch
   - repo: https://github.com/psf/black
     rev: 19.10b0
     hooks:
